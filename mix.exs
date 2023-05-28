@@ -1,5 +1,4 @@
-defmodule BattleShip.MixProject do
-  use Mix.Project
+defmodule BattleShip.MixProject do use Mix.Project
 
   def project do
     [
@@ -14,19 +13,19 @@ defmodule BattleShip.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      applications: applications(Mix.env)
+      extra_applications: [:logger],
+      mod: {BattleShip, []}
     ]
   end
 
-  defp applications(:dev), do: applications(:all) ++ [:remix]
-  defp applications(_all), do: [:logger]
-
   # Run "mix help deps" to learn about dependencies.
-  defp deps do
+  def deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:remix, "~> 0.0.1", only: :dev}
+      {:plug, "~> 1.14"},
+      {:plug_cowboy, "~> 2.0"},
+      {:remix, "~> 0.0.1", only: :dev},
+      {:jason, "~> 1.4"},
+      {:cors_plug, "~> 3.0"}
     ]
   end
 end

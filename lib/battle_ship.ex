@@ -1,119 +1,53 @@
 defmodule BattleShip do
   @moduledoc """
-  Documentation for `BattleShip`.
+    The main module of the game. Includes the game loop function.
   """
 
-  @doc """
-  Hello world.
+  import Board
+  import Ship
 
-  ## Examples
 
-      iex> BattleShip.hello()
-      :world
-
-  """
-
-  def new_board(board_size) do
-    Enum.map(1..board_size, fn _ ->
-      List.duplicate(:empty, board_size)
-    end)
-  end
-
-  def update_cell(board, {x, y}, value) do
-    Enum.with_index(board, fn(row, i) ->
-      if i == x do
-        Enum.with_index(row, fn(cell, j) ->
-          if j == y do
-            value
-          else
-            cell
-          end
-        end)
-      else
-        row
-      end
-    end)
-  end
-
-  defp create_ship(board, {x, y}, length, direction) do
-
-    IO.puts(length)
-
-    if length === 0 do
-      board
-    else
-      updated_board = update_cell(board, {x, y}, :ship)
-
-      case direction do
-        :up -> create_ship(updated_board, {x, y + 1}, length - 1, direction)
-        :down -> create_ship(updated_board, {x, y - 1}, length - 1, direction)
-        :right -> create_ship(updated_board, {x + 1, y}, length - 1, direction)
-        :left -> create_ship(updated_board, {x - 1, y}, length - 1, direction)
-      end
-    end
-  end
-
-  def generate_random_ships(board_size, num_ships) do
-    board = new_board(board_size)
-
-    directions = [:up, :down, :left, :right]
-
-    Enum.reduce(1..num_ships, board, fn _, acc ->
-      random_row = Enum.random(1..board_size)
-      random_col = Enum.random(1..board_size)
-
-      random_direction = Enum.random(directions)
-
-      IO.puts(random_direction)
-
-      #updated_board = update_cell(acc, {random_row, random_col}, :ship)
-
-      create_ship(acc, {random_row, random_col}, 5, random_direction)
-
-      # Enum.take_random(updated_board, random_row - 1) ++ [update_cell(Enum.at(updated_board, random_row - 1), random_col - 1, :ship)] ++ Enum.drop(updated_board, random_row)
-    end)
-  end
-
-  defp ascii_representation(cell) do
-    case cell do
-      :empty -> "~"
-      :buffer -> "+"
-      :ship -> "S"
-      :hit -> "X"
-      :miss -> "O"
-      _ -> "?"
-    end
-  end
-
-  def print_board(board) do
-    Enum.each(board, fn row ->
-      Enum.each(row, fn cell ->
-        IO.write("#{ascii_representation(cell)} ")
-      end)
-      IO.puts("")
-    end)
-  end
-
-  def start do
+  @spec start(any, any) :: no_return
+  def start(_type, _args) do
     IO.puts("Welcome to Battleship!")
-    board_size = read_board_size()
-    board = new_board(board_size)
-    # print_board(board)
-    print_board(generate_random_ships(board_size, 5))
+
+    board = new_board(10)
+    board2 = new_board(10)
+
+
+    palyer_board = generate_random_ships(board, 5)
+    cpu_board = generate_random_ships(board2, 5)
+
+    gameLoop(palyer_board, cpu_board)
   end
 
-  defp read_board_size do
-    IO.gets("Enter the board size:") |> String.trim() |> String.to_integer()
-  end
+  @spec gameLoop([list], [list]) :: no_return
+  def gameLoop(player_board, cpu_board) do
+    IO.puts("\n")
 
-  def gameLoop(board) do
-    IO.puts("Enter the coordinates of your shot:")
-    # x = read_x()
-    # y = read_y()
-    # board = update_cell(board, {x, y}, :hit)
-    # print_board(board)
-    # gameLoop(board)
+    IO.puts("CPU board:")
+    print_board(cpu_board)
+
+    IO.puts("\n")
+
+    IO.puts("Your board:")
+    print_board(player_board)
+
+    try do
+      new_cpu_board = Player.shoot(cpu_board)
+
+      IO.puts("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+
+      new_player_board = Cpu.shoot(player_board)
+
+      gameLoop(new_player_board, new_cpu_board)
+    rescue
+      error ->
+      IO.inspect(error)
+      Kernel.inspect(error)
+      IO.puts("Error: Could not convert to integer")
+      gameLoop(player_board, cpu_board)
+    end
+
   end
 end
-
-BattleShip.start()

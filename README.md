@@ -1,9 +1,13 @@
 # BattleShip
 
-**TODO: Add description**
+An Elixir implementation for a university course.
+
+## Terminal commands
 
 ```bash
 mix compile
+
+mix run --no-halt
 
 iex -S mix
 
