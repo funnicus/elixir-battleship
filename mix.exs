@@ -20,12 +20,6 @@ defmodule BattleShip.MixProject do use Mix.Project
 
   # Run "mix help deps" to learn about dependencies.
   def deps do
-    [
-      {:plug, "~> 1.14"},
-      {:plug_cowboy, "~> 2.0"},
-      {:remix, "~> 0.0.1", only: :dev},
-      {:jason, "~> 1.4"},
-      {:cors_plug, "~> 3.0"}
-    ]
+    []
   end
 end
