@@ -2,7 +2,7 @@
 
 An Elixir implementation for a university course.
 
-In this implementation, you will play against a computer player on a 10x10 board with ship palcements randomly generated. Five ships in total is given to you and the computer.
+In this implementation, you will play against a computer player on a 10x10 board with ship placements randomly generated. Five ships in total is given to you and the computer.
 
 Documentation [here](./docs/DOCS.md)
 
