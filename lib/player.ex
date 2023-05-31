@@ -1,4 +1,8 @@
 defmodule Player do
+  @moduledoc """
+    Functionalities, such as shooting, for the player.
+  """
+
   @spec shoot(list) :: list
   def shoot(board) do
 

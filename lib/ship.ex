@@ -1,6 +1,6 @@
 defmodule Ship do
   @moduledoc """
-    Documentation for `Ship`.
+    Functionalities for representing and manipulating the ships.
   """
 
   import Board

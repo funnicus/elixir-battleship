@@ -26,8 +26,7 @@ defmodule Cpu do
     end
   end
 
-
-  @spec shoot(list, number, number) :: list
+  @spec shoot(list, integer, integer) :: list
   def shoot(board, x \\ nil, y \\ nil) do
 
     IO.puts("CPU is shooting...")

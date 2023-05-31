@@ -2,18 +2,31 @@
 
 An Elixir implementation for a university course.
 
+Documentation [here](./docs/DOCS.md)
+
+## Exercise description
+
+Implement a simple game using one of the non-mainstream languages and paradigms mentioned during the course.
+
+In short, the main tasks of this exercise are:
+
+1. pick an implementation language
+2. implement the game using the language
+3. test the game and assure that it behaves as intended
+4. document how you used the language and paradigm
+
 ## Terminal commands
 
 ```bash
 mix compile
 
-mix run --no-halt
+mix run --no-halt # run and recompile on change
 
 iex -S mix
 
 iex> recompile()
 
-mix test
+mix test # tests
 
 mix test test/battle_ship_test.exs:5 # single test
 
@@ -23,20 +36,3 @@ MIX_ENV=prod mix compile # start prod
 
 mix help # for help
 ```
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `battleship` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:battleship, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/battleship>.

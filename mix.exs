@@ -20,6 +20,8 @@ defmodule BattleShip.MixProject do use Mix.Project
 
   # Run "mix help deps" to learn about dependencies.
   def deps do
-    []
+    [
+      {:dialyxir, "~> 1.3", only: [:dev], runtime: false},
+    ]
   end
 end
